@@ -1,88 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { User, Lock } from 'lucide-react';
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: var(--bg-color);
-`;
-
-const LoginCard = styled.div`
-  background: var(--card-bg);
-  padding: 3rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 2rem;
-  color: var(--text-dark);
-  font-weight: 700;
-`;
-
-const InputGroup = styled.div`
-  margin-bottom: 1.5rem;
-  position: relative;
-  text-align: left;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 500;
-`;
-
-const InputWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const IconWrapper = styled.div`
-  position: absolute;
-  left: 12px;
-  color: var(--text-muted);
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* space for icon */
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  outline: none;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-
-  &:focus {
-    border-color: var(--primary-color);
-  }
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 0.875rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: var(--primary-hover);
-  }
-`;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,38 +14,49 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <LoginCard>
-        <Title>Sign In</Title>
+    <div className="flex items-center justify-center h-screen bg-background">
+      <div className="bg-white p-12 rounded-lg shadow-card w-full max-w-[400px] text-center">
+        <h2 className="mb-8 text-text-dark font-bold text-2xl">Sign In</h2>
         <form onSubmit={handleLogin}>
-          <InputGroup>
-            <Label>Username / Email</Label>
-            <InputWrapper>
-              <IconWrapper><User size={18} /></IconWrapper>
-              <Input 
+          <div className="mb-6 text-left relative">
+            <label className="block mb-2 text-sm text-text-muted font-medium">Username / Email</label>
+            <div className="relative flex items-center">
+              <div className="absolute left-3 text-text-muted">
+                <User size={18} />
+              </div>
+              <input 
                 type="text" 
                 placeholder="Enter your username" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-full py-3 pr-3 pl-10 border border-border rounded-md outline-none text-base transition-colors focus:border-primary"
               />
-            </InputWrapper>
-          </InputGroup>
-          <InputGroup>
-            <Label>Password</Label>
-            <InputWrapper>
-              <IconWrapper><Lock size={18} /></IconWrapper>
-              <Input 
+            </div>
+          </div>
+          <div className="mb-6 text-left relative">
+            <label className="block mb-2 text-sm text-text-muted font-medium">Password</label>
+            <div className="relative flex items-center">
+              <div className="absolute left-3 text-text-muted">
+                <Lock size={18} />
+              </div>
+              <input 
                 type="password" 
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="w-full py-3 pr-3 pl-10 border border-border rounded-md outline-none text-base transition-colors focus:border-primary"
               />
-            </InputWrapper>
-          </InputGroup>
-          <Button type="submit">Sign In</Button>
+            </div>
+          </div>
+          <button 
+            type="submit" 
+            className="w-full py-3.5 bg-primary text-white border-none rounded-md text-base font-semibold mt-4 transition-colors hover:bg-primary-hover"
+          >
+            Sign In
+          </button>
         </form>
-      </LoginCard>
-    </Container>
+      </div>
+    </div>
   );
 };
 

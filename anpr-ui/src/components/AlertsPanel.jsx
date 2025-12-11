@@ -1,64 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import { AlertTriangle, X } from 'lucide-react';
-
-const Panel = styled.div`
-  background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 1.5rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Title = styled.h3`
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: var(--text-dark);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const AlertList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  overflow-y: auto;
-  max-height: 300px; /* Optional, depending on layout */
-`;
-
-const AlertItem = styled.div`
-  background: #fef2f2;
-  border-left: 4px solid #ef4444;
-  padding: 0.75rem;
-  border-radius: 4px;
-`;
-
-const AlertHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.25rem;
-  align-items: center;
-`;
-
-const PlateNumber = styled.span`
-  font-weight: 700;
-  color: #991b1b;
-  font-size: 0.9rem;
-`;
-
-const Time = styled.span`
-  font-size: 0.75rem;
-  color: #ef4444;
-`;
-
-const Message = styled.p`
-  margin: 0;
-  font-size: 0.85rem;
-  color: #b91c1c;
-`;
 
 const AlertsPanel = () => {
     const alerts = [
@@ -68,25 +8,25 @@ const AlertsPanel = () => {
     ];
 
   return (
-    <Panel>
-      <Title>
+    <div className="bg-white rounded-lg shadow-subtle p-6 h-full flex flex-col">
+      <h3 className="mb-4 text-base text-text-dark flex justify-between items-center font-bold">
         Alerts
-        <span style={{ fontSize: '0.75rem', color: 'var(--primary-color)', background:'rgba(235,87,87,0.1)', padding:'2px 8px', borderRadius:'12px' }}>
+        <span className="text-xs text-primary bg-[rgba(235,87,87,0.1)] px-2 py-0.5 rounded-xl">
             {alerts.length} Pending
         </span>
-      </Title>
-      <AlertList>
+      </h3>
+      <div className="flex flex-col gap-4 overflow-y-auto max-h-[300px]">
         {alerts.map(alert => (
-            <AlertItem key={alert.id}>
-                <AlertHeader>
-                    <PlateNumber>{alert.plate}</PlateNumber>
-                    <Time>{alert.time}</Time>
-                </AlertHeader>
-                <Message>{alert.msg}</Message>
-            </AlertItem>
+            <div key={alert.id} className="bg-red-50 border-l-4 border-red-500 p-3 rounded">
+                <div className="flex justify-between mb-1 items-center">
+                    <span className="font-bold text-red-800 text-sm">{alert.plate}</span>
+                    <span className="text-xs text-red-500">{alert.time}</span>
+                </div>
+                <p className="m-0 text-xs text-red-700">{alert.msg}</p>
+            </div>
         ))}
-      </AlertList>
-    </Panel>
+      </div>
+    </div>
   );
 };
 

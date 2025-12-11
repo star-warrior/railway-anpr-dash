@@ -1,73 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import { MoreHorizontal } from 'lucide-react';
-
-const TableCard = styled.div`
-  background: var(--card-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  margin-top: 2rem;
-  overflow: hidden;
-  padding: 1.5rem;
-`;
-
-const TableTitle = styled.h3`
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-  font-size: 1.1rem;
-`;
-
-const TableContainer = styled.div`
-  width: 100%;
-  overflow-x: auto;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 800px;
-`;
-
-const Th = styled.th`
-  text-align: left;
-  padding: 1rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-bottom: 1px solid var(--border-color);
-`;
-
-const Td = styled.td`
-  padding: 1rem;
-  color: var(--text-dark);
-  font-size: 0.9rem;
-  border-bottom: 1px solid var(--border-color);
-  
-  &:first-child {
-    font-weight: 500;
-  }
-`;
-
-const StatusPill = styled.span`
-  background-color: ${props => props.status === 'Inward' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)'};
-  color: ${props => props.status === 'Inward' ? '#10b981' : '#f59e0b'};
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 600;
-`;
-
-const ActionButton = styled.button`
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  padding: 0.5rem;
-  border-radius: 50%;
-  &:hover {
-    background-color: var(--bg-color);
-    color: var(--text-dark);
-  }
-`;
 
 const RecentTrucksTable = () => {
     // Placeholder Data
@@ -80,39 +12,43 @@ const RecentTrucksTable = () => {
     ];
 
   return (
-    <TableCard>
-      <TableTitle>Recent Vehicle Activity</TableTitle>
-      <TableContainer>
-        <Table>
+    <div className="bg-white rounded-lg shadow-subtle mt-8 overflow-hidden p-6">
+      <h3 className="mb-4 text-text-dark text-lg font-bold">Recent Vehicle Activity</h3>
+      <div className="w-full overflow-x-auto">
+        <table className="w-full border-collapse min-w-[800px]">
           <thead>
             <tr>
-              <Th>Date & Time</Th>
-              <Th>Vehicle No.</Th>
-              <Th>Driver / Firm</Th>
-              <Th>Purpose</Th>
-              <Th>Status</Th>
-              <Th>Action</Th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Date & Time</th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Vehicle No.</th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Driver / Firm</th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Purpose</th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Status</th>
+              <th className="text-left p-4 text-text-muted font-semibold text-sm border-b border-border">Action</th>
             </tr>
           </thead>
           <tbody>
             {trucks.map((truck) => (
                 <tr key={truck.id}>
-                    <Td>{truck.time}</Td>
-                    <Td>{truck.plate}</Td>
-                    <Td>{truck.driver}</Td>
-                    <Td>{truck.purpose}</Td>
-                    <Td><StatusPill status={truck.status}>{truck.status}</StatusPill></Td>
-                    <Td>
-                        <ActionButton title="Details">
+                    <td className="p-4 text-text-dark text-sm border-b border-border font-medium">{truck.time}</td>
+                    <td className="p-4 text-text-dark text-sm border-b border-border">{truck.plate}</td>
+                    <td className="p-4 text-text-dark text-sm border-b border-border">{truck.driver}</td>
+                    <td className="p-4 text-text-dark text-sm border-b border-border">{truck.purpose}</td>
+                    <td className="p-4 border-b border-border">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${truck.status === 'Inward' ? 'bg-emerald-50 text-emerald-500' : 'bg-amber-50 text-amber-500'}`}>
+                            {truck.status}
+                        </span>
+                    </td>
+                    <td className="p-4 border-b border-border">
+                        <button className="bg-transparent border-none text-text-muted p-2 rounded-full hover:bg-background hover:text-text-dark transition-colors" title="Details">
                             <MoreHorizontal size={18} />
-                        </ActionButton>
-                    </Td>
+                        </button>
+                    </td>
                 </tr>
             ))}
           </tbody>
-        </Table>
-      </TableContainer>
-    </TableCard>
+        </table>
+      </div>
+    </div>
   );
 };
 

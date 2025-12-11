@@ -1,30 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
-
-const ChartsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-`;
-
-const ChartCard = styled.div`
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-`;
-
-const CardTitle = styled.h3`
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  color: var(--text-dark);
-  display: flex;
-  justify-content: space-between;
-`;
 
 // Placeholder Data
 const inwardOutwardData = [
@@ -53,10 +28,10 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const ChartsSection = () => {
   return (
-    <ChartsContainer>
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 mt-8">
       {/* Bar Chart */}
-      <ChartCard>
-         <CardTitle>Inward vs Outward</CardTitle>
+      <div className="bg-white p-6 rounded-lg shadow-subtle flex flex-col">
+         <h3 className="mb-6 text-base text-text-dark flex justify-between font-bold">Inward vs Outward</h3>
          <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
               <BarChart data={inwardOutwardData}>
@@ -65,16 +40,16 @@ const ChartsSection = () => {
                 <YAxis axisLine={false} tickLine={false} />
                 <Tooltip cursor={{fill: '#f4f5f7'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} />
                 <Legend iconType="circle" />
-                <Bar dataKey="inward" fill="var(--primary-color)" radius={[4, 4, 0, 0]} barSize={30} />
+                <Bar dataKey="inward" fill="#eb5757" radius={[4, 4, 0, 0]} barSize={30} />
                 <Bar dataKey="outward" fill="#1f2937" radius={[4, 4, 0, 0]} barSize={30} />
               </BarChart>
             </ResponsiveContainer>
          </div>
-      </ChartCard>
+      </div>
 
       {/* Line Chart */}
-      <ChartCard>
-        <CardTitle>Avg Loading Time (min)</CardTitle>
+      <div className="bg-white p-6 rounded-lg shadow-subtle flex flex-col">
+        <h3 className="mb-6 text-base text-text-dark flex justify-between font-bold">Avg Loading Time (min)</h3>
         <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
               <LineChart data={loadingTimeData}>
@@ -82,15 +57,15 @@ const ChartsSection = () => {
                 <XAxis dataKey="time" axisLine={false} tickLine={false} />
                 <YAxis axisLine={false} tickLine={false} />
                 <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} />
-                <Line type="monotone" dataKey="avg" stroke="var(--primary-color)" strokeWidth={3} dot={{ r: 4, fill: 'var(--primary-color)' }} activeDot={{ r: 6 }} />
+                <Line type="monotone" dataKey="avg" stroke="#eb5757" strokeWidth={3} dot={{ r: 4, fill: '#eb5757' }} activeDot={{ r: 6 }} />
               </LineChart>
             </ResponsiveContainer>
          </div>
-      </ChartCard>
+      </div>
 
       {/* Pie Chart */}
-      <ChartCard>
-        <CardTitle>Vendor Breakdown</CardTitle>
+      <div className="bg-white p-6 rounded-lg shadow-subtle flex flex-col">
+        <h3 className="mb-6 text-base text-text-dark flex justify-between font-bold">Vendor Breakdown</h3>
         <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
               <PieChart>
@@ -112,8 +87,8 @@ const ChartsSection = () => {
               </PieChart>
             </ResponsiveContainer>
          </div>
-      </ChartCard>
-    </ChartsContainer>
+      </div>
+    </div>
   );
 };
 
