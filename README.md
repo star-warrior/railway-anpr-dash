@@ -77,4 +77,4 @@ anpr-ui/
 
 ---
 
-Built with ❤️ by the ANPR Team.
+Built with ❤️ by the Jay.
